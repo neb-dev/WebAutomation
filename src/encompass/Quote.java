@@ -1,5 +1,6 @@
 package encompass;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -12,16 +13,24 @@ public class Quote {
 		// init webdriver object
 		WebDriver driver = new ChromeDriver();
 		
-		// navigate to encompass
-		driver.get("https://www.encompassinsurance.com/");
+		// navigate to encompass agent login form
+		driver.get("https://dashboard.encompassinsurance.com/pkmslogin.form");
 		
-		// maximize window
-		driver.manage().window().maximize();
+		// 3 second timeout for page load
+		Thread.sleep(3000);
 		
-		// 5 second timeout for page load
-		Thread.sleep(5000);
+		// select username input field
+		driver.findElement(By.name("username")).sendKeys("a1177529");
 		
-		driver.close();
+		// select password input field
+		driver.findElement(By.name("password")).sendKeys("4sD3Y14bK0MJ");
+		
+		// select submit button
+		// driver.findElement(By.name("submitBtn")).click();
+		
+		Thread.sleep(3000);
+		
+		driver.quit();
 	}
 
 }
