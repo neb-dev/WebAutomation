@@ -20,6 +20,7 @@ public class Quote {
 		// 3 second timeout for page load
 		Thread.sleep(3000);
 		
+		/* --------------- ENCOMPASS AGENT LOGIN --------------- */
 		// select username input field
 		driver.findElement(By.name("username")).sendKeys("a1177529");
 		// select password input field
@@ -62,7 +63,7 @@ public class Quote {
 		// focus popup window
 		driver.switchTo().window(popupWindow);
 		
-		
+		/* --------------- INITIAL START FORM --------------- */
 		// click state input dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationStateMeaning2_img")).click();
 		// 1 second timeout for input update
