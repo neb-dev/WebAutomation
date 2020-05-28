@@ -123,7 +123,7 @@ public class Quote {
 		
 		// click continue button
 		driver.findElement(By.id("_PolicyContinue")).click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		/* --------------- SECOND PAGE OF QUOTE FORM --------------- */
 		// click gender input dropdown
@@ -139,12 +139,56 @@ public class Quote {
 		
 		// click continue button
 		driver.findElement(By.id("_ResidentDriverContinue")).click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		/* --------------- THIRD PAGE OF QUOTE FORM --------------- */
+		// click continue button
+		driver.findElement(By.id("_VehicleViolationsContinue")).click();
+		Thread.sleep(2000);
 		
+		/* --------------- FOURTH PAGE OF QUOTE FORM --------------- */
+		// click carrier data radio input
+		driver.findElement(By.id("FVCCDBCalcRateUsingMeaning_Prior Carrier Data")).click();
 		
-		Thread.sleep(5000);
-		driver.quit();
+		// select number of vehicles
+		driver.findElement(By.id("FVNETXPolicyInformationEGroupVehicleCount_input")).sendKeys("1");
+		
+		// click continue button
+		driver.findElement(By.id("_VehicleUndrwrtngContinue")).click();
+		Thread.sleep(2000);
+		
+		/* --------------- FIFTH PAGE OF QUOTE FORM --------------- */
+		// click continue button
+		driver.findElement(By.id("_PropertyInfoContinue")).click();
+		Thread.sleep(2000);
+		
+		/* --------------- SIXTH PAGE OF QUOTE FORM --------------- */
+		// click continue button
+		driver.findElement(By.id("_PropertyLossContinue")).click();
+		Thread.sleep(2000);
+		
+		/* --------------- SEVENTH PAGE OF QUOTE FORM --------------- */
+		// click continue button
+		driver.findElement(By.id("_PropUndrwrtngContinue")).click();
+		Thread.sleep(2000);
+		
+		/* --------------- LAST PAGE OF QUOTE FORM --------------- */
+		/* needed data
+		 * roof year
+		 * year property was built
+		 * roof type
+		 * property purchase date
+		 * occupancy type (owner, tenant, vacant)
+		 * do any apply?
+		 * 	- trampoline
+		 * 	- unfenced pool
+		 * 	- is property in flood, wavewash, sinkhole, pollution, landslide, or cave-in area
+		 * 	- wood burning stove
+		 * 	- is insured in the name of a corporation
+		 * 	- is foundation open, piers, pilings, or stilts
+		 * */
+		
+		// Thread.sleep(5000);
+		// driver.quit();
 	}
 }
