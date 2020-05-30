@@ -150,6 +150,9 @@ public class Quote {
 		// click carrier data radio input
 		driver.findElement(By.id("FVCCDBCalcRateUsingMeaning_Prior Carrier Data")).click();
 		
+		// select years as auto customer - get text value from length with prior carrier
+		driver.findElement(By.id("FVCCDBCalcAgentAutoYearAsCustomer_input")).sendKeys(driver.findElement(By.id("")).getText());
+		
 		// select number of vehicles
 		driver.findElement(By.id("FVNETXPolicyInformationEGroupVehicleCount_input")).sendKeys("1");
 		
@@ -158,6 +161,49 @@ public class Quote {
 		Thread.sleep(2000);
 		
 		/* --------------- FIFTH PAGE OF QUOTE FORM --------------- */
+		// click occupancy input dropdown
+		driver.findElement(By.id("FVENCXPropertyENCXOccupancyCodeMeaning_img")).click();
+		Thread.sleep(1000);
+		// select owner value in dropdown
+		driver.findElement(By.id("spPopupRow0")).click();
+		
+		// send property date
+		// driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys("MM/DD/YYYY");
+		
+		// click number of families input dropdown
+		driver.findElement(By.id("FVENCXPropertyAttributesNumberFamiliesMeaning_img")).click();
+		// select number of families value in dropdown
+		driver.findElement(By.id("spPopupRow0")).click();
+		
+		// click construction type input dropdown
+		driver.findElement(By.id("FVENCXPropertyConstructionMeaning_img")).click();
+		// select construction type value in dropdown
+		driver.findElement(By.id("spPopupRow3")).click();
+		
+		// select year built input
+		driver.findElement(By.id("FVENCXPropertyYearBuiltNumber_input")).sendKeys("1992");
+		
+		// click roof type input dropdown
+		driver.findElement(By.id("FVENCXPropertyCalcRoofTypeMeaning_img")).click();
+		Thread.sleep(1000);
+		// select roof type value in dropdown
+		driver.findElement(By.id("spPopupRow1")).click();
+		
+		// click roof style input dropdown
+		driver.findElement(By.id("FVENCXPropertyRoofStyleMeaning_img")).click();
+		Thread.sleep(1000);
+		// select roof style value in dropdown
+		driver.findElement(By.id("spPopupRow1")).click();
+		
+		// select total living area sq ft
+		driver.findElement(By.id("FVENCXPropertyCalcFinishedFloorArea_input")).sendKeys("1613");
+		
+		// click style of home input dropdown
+		driver.findElement(By.id("FVENCXPropertyCalcStyleOfHomeMeaning_img")).click();
+		Thread.sleep(1000);
+		// select style of home value in dropdown
+		driver.findElement(By.id("spPopupRow1")).click();
+		
 		// click continue button
 		driver.findElement(By.id("_PropertyInfoContinue")).click();
 		Thread.sleep(2000);
@@ -168,24 +214,34 @@ public class Quote {
 		Thread.sleep(2000);
 		
 		/* --------------- SEVENTH PAGE OF QUOTE FORM --------------- */
+		// click following conditions input dropdown
+		driver.findElement(By.id("FVENCXPropertyUnderwritngCalcPropertyUnderwriteMeets_img")).click();
+		Thread.sleep(1000);
+		// select conditions value in dropdown
+		driver.findElement(By.id("spPopupRow1")).click();
+		
+		// click prior insurance input dropdown
+		driver.findElement(By.id("FVNETXPolicyInformationENCXPropertyPrirInsrncTypMnng_img")).click();
+		Thread.sleep(1000);
+		// select property insurance value in dropdown
+		driver.findElement(By.id("spPopupRow2")).click();
+		Thread.sleep(1000);
+		
 		// click continue button
 		driver.findElement(By.id("_PropUndrwrtngContinue")).click();
 		Thread.sleep(2000);
 		
 		/* --------------- LAST PAGE OF QUOTE FORM --------------- */
-		/* needed data
-		 * roof year
-		 * year property was built
-		 * roof type
-		 * property purchase date
-		 * occupancy type (owner, tenant, vacant)
-		 * do any apply?
-		 * 	- trampoline
-		 * 	- unfenced pool
-		 * 	- is property in flood, wavewash, sinkhole, pollution, landslide, or cave-in area
-		 * 	- wood burning stove
-		 * 	- is insured in the name of a corporation
-		 * 	- is foundation open, piers, pilings, or stilts
+		/* NEEDED DATA
+		 * year installed
+		 * 	wiring
+		 * 	plumbing
+		 * 	roof
+		 * 	heating
+		 * Reconstruction cost
+		 * Is home rented to others?
+		 * 
+		 * 
 		 * */
 		
 		// Thread.sleep(5000);
