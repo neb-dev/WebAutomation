@@ -88,7 +88,7 @@ public class Quote {
 		// click start button
 		driver.findElement(By.id("ACFRPreLaunchStart")).click();
 		// 3 second timeout for page load
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		
 		/* --------------- FIRST PAGE OF QUOTE FORM --------------- */
 		// close dialog box
@@ -123,7 +123,7 @@ public class Quote {
 		
 		// click continue button
 		driver.findElement(By.id("_PolicyContinue")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		/* --------------- SECOND PAGE OF QUOTE FORM --------------- */
 		// click gender input dropdown
@@ -139,7 +139,7 @@ public class Quote {
 		
 		// click continue button
 		driver.findElement(By.id("_ResidentDriverContinue")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		/* --------------- THIRD PAGE OF QUOTE FORM --------------- */
 		// click continue button
@@ -149,69 +149,85 @@ public class Quote {
 		/* --------------- FOURTH PAGE OF QUOTE FORM --------------- */
 		// click carrier data radio input
 		driver.findElement(By.id("FVCCDBCalcRateUsingMeaning_Prior Carrier Data")).click();
+		Thread.sleep(1000);
 		
 		// select years as auto customer - get text value from length with prior carrier
-		driver.findElement(By.id("FVCCDBCalcAgentAutoYearAsCustomer_input")).sendKeys(driver.findElement(By.id("")).getText());
+		driver.findElement(By.id("FVCCDBCalcAgentAutoYearAsCustomer_input")).sendKeys(driver.findElement(By.id("_CCDBYearsWithPrior_ro")).getText());
 		
 		// select number of vehicles
 		driver.findElement(By.id("FVNETXPolicyInformationEGroupVehicleCount_input")).sendKeys("1");
 		
 		// click continue button
 		driver.findElement(By.id("_VehicleUndrwrtngContinue")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		/* --------------- FIFTH PAGE OF QUOTE FORM --------------- */
+		// stores parent window handle
+		parentWindow = driver.getWindowHandle();
+		// will store popup window handle
+		popupWindow = null;
+		
+		// click calculate in MSB button
+		driver.findElement(By.id("_FVENCXPropertyCalcMSBButton")).click();
+		// 6 second timeout for page load
+		Thread.sleep(6000);
+		
+		// stores all window handles
+		handles = driver.getWindowHandles();
+		// cursor to iterate through handles collection
+		iterator = handles.iterator();
+		
+		// loop through iterator
+		while(iterator.hasNext()) {
+			popupWindow = iterator.next();
+		}
+		
+		// focus popup window
+		driver.switchTo().window(popupWindow);
+		
+		// click finish button
+		driver.findElement(By.className("save-or-discard-valuation")).click();
+		Thread.sleep(3000);
+		
+		// click save button
+		driver.findElement(By.id("SaveValuationButton")).click();
+		// switch back to parent window
+		driver.switchTo().window(parentWindow);
+		Thread.sleep(8000);
+		
+		// select dwelling protection input - get text value from reconstruction cost
+		driver.findElement(By.id("FVENCXPropertyCalcResidenceReplacementValue_input")).sendKeys(driver.findElement(By.id("_FVENCXPropertyCalcMSBButton")).getText());
+		
 		// click occupancy input dropdown
 		driver.findElement(By.id("FVENCXPropertyENCXOccupancyCodeMeaning_img")).click();
 		Thread.sleep(1000);
 		// select owner value in dropdown
 		driver.findElement(By.id("spPopupRow0")).click();
 		
-		// send property date
-		// driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys("MM/DD/YYYY");
+		// select property purchase date
+		driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys("09/06/2013");
 		
-		// click number of families input dropdown
-		driver.findElement(By.id("FVENCXPropertyAttributesNumberFamiliesMeaning_img")).click();
-		// select number of families value in dropdown
+		// select if home is rented out
+		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("spPopupRow1")).click();
+		
+		// select sump pump
+		driver.findElement(By.id("FVENCXPropertySumpPumpCountMeaning_img")).click();
+		Thread.sleep(1000);
 		driver.findElement(By.id("spPopupRow0")).click();
 		
-		// click construction type input dropdown
-		driver.findElement(By.id("FVENCXPropertyConstructionMeaning_img")).click();
-		// select construction type value in dropdown
-		driver.findElement(By.id("spPopupRow3")).click();
-		
-		// select year built input
-		driver.findElement(By.id("FVENCXPropertyYearBuiltNumber_input")).sendKeys("1992");
-		
-		// click roof type input dropdown
-		driver.findElement(By.id("FVENCXPropertyCalcRoofTypeMeaning_img")).click();
-		Thread.sleep(1000);
-		// select roof type value in dropdown
-		driver.findElement(By.id("spPopupRow1")).click();
-		
-		// click roof style input dropdown
-		driver.findElement(By.id("FVENCXPropertyRoofStyleMeaning_img")).click();
-		Thread.sleep(1000);
-		// select roof style value in dropdown
-		driver.findElement(By.id("spPopupRow1")).click();
-		
-		// select total living area sq ft
-		driver.findElement(By.id("FVENCXPropertyCalcFinishedFloorArea_input")).sendKeys("1613");
-		
-		// click style of home input dropdown
-		driver.findElement(By.id("FVENCXPropertyCalcStyleOfHomeMeaning_img")).click();
-		Thread.sleep(1000);
-		// select style of home value in dropdown
-		driver.findElement(By.id("spPopupRow1")).click();
+		// select roof year
+		driver.findElement(By.id("FVENCXPropertyRoofImprovementYearNumber_input")).sendKeys("2019");
 		
 		// click continue button
 		driver.findElement(By.id("_PropertyInfoContinue")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		/* --------------- SIXTH PAGE OF QUOTE FORM --------------- */
 		// click continue button
 		driver.findElement(By.id("_PropertyLossContinue")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		/* --------------- SEVENTH PAGE OF QUOTE FORM --------------- */
 		// click following conditions input dropdown
@@ -229,9 +245,16 @@ public class Quote {
 		
 		// click continue button
 		driver.findElement(By.id("_PropUndrwrtngContinue")).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		
 		/* --------------- LAST PAGE OF QUOTE FORM --------------- */
+		// select wind/hail coverage
+		//driver.findElement(By.id("FTNETXCalcErrorGridInput_2_img")).click();
+		//Thread.sleep(1000);
+		//driver.findElement(By.id("spPopupRow12")).click();
+		
+		// click continue inside modal window
+		//driver.findElement(By.id("_ErrorModalContinue")).click();
 		/* NEEDED DATA
 		 * year installed
 		 * 	wiring
