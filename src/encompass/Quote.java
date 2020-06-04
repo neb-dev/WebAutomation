@@ -249,23 +249,22 @@ public class Quote {
 		
 		/* --------------- LAST PAGE OF QUOTE FORM --------------- */
 		// select wind/hail coverage
-		//driver.findElement(By.id("FTNETXCalcErrorGridInput_2_img")).click();
-		//Thread.sleep(1000);
-		//driver.findElement(By.id("spPopupRow12")).click();
+		driver.findElement(By.id("FTNETXCalcErrorGridInput_2_img")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("spPopupRow12")).click();
 		
 		// click continue inside modal window
-		//driver.findElement(By.id("_ErrorModalContinue")).click();
-		/* NEEDED DATA
-		 * year installed
-		 * 	wiring
-		 * 	plumbing
-		 * 	roof
-		 * 	heating
-		 * Reconstruction cost
-		 * Is home rented to others?
-		 * 
-		 * 
-		 * */
+		driver.findElement(By.id("_ErrorModalContinue")).click();
+		Thread.sleep(5000);
+		
+		// click close on binding alert
+		driver.findElement(By.id("_CloseDoNotBind")).click();
+		Thread.sleep(1000);
+		
+		// store quote value
+		String quoteValue = driver.findElement(By.className("wf_premiumView")).getText();
+		// print quote value to console
+		System.out.println(quoteValue);
 		
 		// Thread.sleep(5000);
 		// driver.quit();
