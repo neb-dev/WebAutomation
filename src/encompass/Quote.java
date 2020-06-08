@@ -1,5 +1,7 @@
 package encompass;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -9,7 +11,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Quote {
+	
+	static void connectToDataSource() {
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cms", "cms_user", "userpass");
+			System.out.println("Connected to MySQL Database...");
+			System.out.println(conn.isValid(1000));
+			conn.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) throws Exception {
+		// connect to mysql database
+		connectToDataSource();
+		
 		// set webdriver to chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\josh\\Downloads\\chromedriver_win32\\chromedriver.exe");
 		// init webdriver object - pass options argument
