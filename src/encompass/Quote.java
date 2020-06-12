@@ -2,6 +2,8 @@ package encompass;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -14,9 +16,21 @@ public class Quote {
 	
 	static void connectToDataSource() {
 		try {
+			// connect to mysql database
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cms", "cms_user", "userpass");
 			System.out.println("Connected to MySQL Database...");
 			System.out.println(conn.isValid(1000));
+			
+			// create statement object to send to sql database
+			Statement stmt = conn.createStatement();
+			
+			// execute query - store result
+			ResultSet result = stmt.executeQuery("select * from article");
+			
+			while(result.next()) {
+				System.out.println(result.getInt("id") + ", " + result.getString("title"));
+			}
+			
 			conn.close();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -24,7 +38,7 @@ public class Quote {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		// connect to mysql database
+		
 		connectToDataSource();
 		
 		// set webdriver to chrome driver
