@@ -13,6 +13,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Quote {
+	static String id = "";
+	static String first_name = ""; 
+	static String last_name = "";
+	static String date_of_birth = "";
+	static String email = "";
+	static String phone = "";
+	static String gender = "";
+	static String marital_status = ""; 
+	static String address = "";
+	static String city = "";
+	static String state = "";
+	static String zip = "";
+	static String county = "";
+	static String residents = "";
+	static String vehicles = "";
+	static String date_of_purchase = "";
+	static String sump_pumps = "";
+	static String roof_year = "";
+	static String conditions = "";
 	
 	static void connectToDataSource() {
 		try {
@@ -25,10 +44,43 @@ public class Quote {
 			Statement stmt = conn.createStatement();
 			
 			// execute query - store result
-			ResultSet result = stmt.executeQuery("select * from article");
+			ResultSet result = stmt.executeQuery("select * from encompass_quote");
 			
 			while(result.next()) {
-				System.out.println(result.getInt("id") + ", " + result.getString("title"));
+				// System.out.println(result.getInt("id") + ", " + result.getString("title"));
+				id = result.getString("id");
+				first_name = result.getString("first_name");
+				last_name = result.getString("last_name");
+				date_of_birth = result.getString("dob");
+				email = result.getString("email");
+				phone = result.getString("phone");
+				gender = result.getString("gender");
+				marital_status = result.getString("marital_status");
+				address = result.getString("address");
+				city = result.getString("city");
+				state = result.getString("state");
+				zip = result.getString("zip");
+				county = result.getString("county");
+				residents = result.getString("residents");
+				vehicles = result.getString("vehicles");
+				date_of_purchase = result.getString("dop");
+				sump_pumps = result.getString("sump");
+				roof_year = result.getString("roof_year");
+				conditions = result.getString("conditions");
+				System.out.println("id: " + id + 
+						"\nname: " + first_name + " " + last_name + 
+						"\ndob: " + date_of_birth + 
+						"\nemail: " + email + 
+						"\nphone: " + phone + 
+						"\ngender: " + gender +
+						"\nmarital status: " + marital_status +
+						"\naddress: " + address + " " + city + " " + state + " " + zip + " " + county +
+						"\nresidents: " + residents +
+						"\nvehicles: " + vehicles +
+						"\ndate of purchase: " + date_of_purchase +
+						"\nsump pumps: " + sump_pumps +
+						"\nroof year: " + roof_year +
+						"\nconditions: " + conditions);
 			}
 			
 			conn.close();
@@ -40,6 +92,8 @@ public class Quote {
 	public static void main(String[] args) throws Exception {
 		
 		connectToDataSource();
+		
+		System.out.println("name: " + first_name + " " + last_name);
 		
 		// set webdriver to chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\josh\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -126,19 +180,19 @@ public class Quote {
 		driver.findElement(By.id("_fcraCloseButton")).click();
 		
 		// select insured first name input
-		driver.findElement(By.id("FVNETXInsuredFirstName_input")).sendKeys("Laura");
+		driver.findElement(By.id("FVNETXInsuredFirstName_input")).sendKeys(first_name);
 		// select insured last name input
-		driver.findElement(By.id("FVNETXInsuredLastName_input")).sendKeys("Weidert");
+		driver.findElement(By.id("FVNETXInsuredLastName_input")).sendKeys(last_name);
 		// select dob input
-		driver.findElement(By.id("FVNETXInsuredCalcDOB_input")).sendKeys("07/25/1961");
+		driver.findElement(By.id("FVNETXInsuredCalcDOB_input")).sendKeys(date_of_birth);
 		// select email input
-		driver.findElement(By.id("FVNETXAddressEmailAddress_input")).sendKeys("weidertl@aetna.com");
+		driver.findElement(By.id("FVNETXAddressEmailAddress_input")).sendKeys(email);
 		// select home phone input
-		driver.findElement(By.id("FVNETXAddressHomePhoneNumber_input")).sendKeys("(402) 630-3383");
+		driver.findElement(By.id("FVNETXAddressHomePhoneNumber_input")).sendKeys(phone);
 		// select address input
-		driver.findElement(By.id("FVNETXAddressAddressLine1_input")).sendKeys("15215  Valley St");
+		driver.findElement(By.id("FVNETXAddressAddressLine1_input")).sendKeys(address);
 		// select city input
-		driver.findElement(By.id("FVNETXAddressCity_input")).sendKeys("OMAHA");
+		driver.findElement(By.id("FVNETXAddressCity_input")).sendKeys(city);
 		// click state input dropdown
 		driver.findElement(By.id("FVNETXAddressState_img")).click();
 		// 1 second timeout for input update
@@ -146,9 +200,9 @@ public class Quote {
 		// select state value in dropdown
 		driver.findElement(By.id("spPopupRow30")).click();
 		// select zip code input
-		driver.findElement(By.id("FVNETXAddressPostalCode_input")).sendKeys("68144");
+		driver.findElement(By.id("FVNETXAddressPostalCode_input")).sendKeys(zip);
 		// click county input dropdown
-		driver.findElement(By.id("FVNETXAddressCountyMeaning_img")).click();
+		driver.findElement(By.id("FVNETXAddressCountyMeaning_img")).click(); /* ----------------- county ----------------- */ 
 		Thread.sleep(1000);
 		driver.findElement(By.id("spPopupRow27")).click();
 		
@@ -158,12 +212,12 @@ public class Quote {
 		
 		/* --------------- SECOND PAGE OF QUOTE FORM --------------- */
 		// click gender input dropdown
-		driver.findElement(By.id("FTNETXDrivergGenderMeaning_1_img")).click();
+		driver.findElement(By.id("FTNETXDrivergGenderMeaning_1_img")).click(); /* ----------------- gender ----------------- */ 
 		Thread.sleep(1000);
 		driver.findElement(By.id("spPopupRow0")).click();
 		Thread.sleep(1000);
 		// click marital status input dropdown
-		driver.findElement(By.id("FTNETXDriverCalcMaritalStatusMeaning1_1_img")).click();
+		driver.findElement(By.id("FTNETXDriverCalcMaritalStatusMeaning1_1_img")).click(); /* ----------------- marital status ----------------- */ 
 		Thread.sleep(1000);
 		driver.findElement(By.id("spPopupRow2")).click();
 		Thread.sleep(1000);
@@ -236,20 +290,20 @@ public class Quote {
 		driver.findElement(By.id("spPopupRow0")).click();
 		
 		// select property purchase date
-		driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys("09/06/2013");
+		driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys(date_of_purchase);
 		
 		// select if home is rented out
-		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click();
+		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click(); /* ----------------- is rented? ----------------- */ 
 		Thread.sleep(1000);
 		driver.findElement(By.id("spPopupRow1")).click();
 		
 		// select sump pump
-		driver.findElement(By.id("FVENCXPropertySumpPumpCountMeaning_img")).click();
+		driver.findElement(By.id("FVENCXPropertySumpPumpCountMeaning_img")).click(); /* ----------------- number of sump pumps ----------------- */ 
 		Thread.sleep(1000);
 		driver.findElement(By.id("spPopupRow0")).click();
 		
 		// select roof year
-		driver.findElement(By.id("FVENCXPropertyRoofImprovementYearNumber_input")).sendKeys("2019");
+		driver.findElement(By.id("FVENCXPropertyRoofImprovementYearNumber_input")).sendKeys(roof_year);
 		
 		// click continue button
 		driver.findElement(By.id("_PropertyInfoContinue")).click();
@@ -262,7 +316,7 @@ public class Quote {
 		
 		/* --------------- SEVENTH PAGE OF QUOTE FORM --------------- */
 		// click following conditions input dropdown
-		driver.findElement(By.id("FVENCXPropertyUnderwritngCalcPropertyUnderwriteMeets_img")).click();
+		driver.findElement(By.id("FVENCXPropertyUnderwritngCalcPropertyUnderwriteMeets_img")).click(); /* ----------------- conditions ----------------- */ 
 		Thread.sleep(1000);
 		// select conditions value in dropdown
 		driver.findElement(By.id("spPopupRow1")).click();
