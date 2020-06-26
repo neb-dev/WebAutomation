@@ -202,9 +202,11 @@ public class Quote {
 		// select zip code input
 		driver.findElement(By.id("FVNETXAddressPostalCode_input")).sendKeys(zip);
 		// click county input dropdown
-		driver.findElement(By.id("FVNETXAddressCountyMeaning_img")).click(); /* ----------------- county ----------------- */ 
+		driver.findElement(By.id("FVNETXAddressCountyMeaning_img")).click(); 
 		Thread.sleep(1000);
-		driver.findElement(By.id("spPopupRow27")).click();
+		// click dropdown value by searching inner text value
+		driver.findElement(By.xpath("//td[text()='" + county.toUpperCase() + "']")).click();
+		//driver.findElement(By.id("spPopupRow27")).click();
 		
 		// click continue button
 		driver.findElement(By.id("_PolicyContinue")).click();
@@ -212,14 +214,18 @@ public class Quote {
 		
 		/* --------------- SECOND PAGE OF QUOTE FORM --------------- */
 		// click gender input dropdown
-		driver.findElement(By.id("FTNETXDrivergGenderMeaning_1_img")).click(); /* ----------------- gender ----------------- */ 
+		driver.findElement(By.id("FTNETXDrivergGenderMeaning_1_img")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.id("spPopupRow0")).click();
+		// click dropdown value by searching inner text value
+		driver.findElement(By.xpath("//td[text()='" + gender + "']")).click();
+		//driver.findElement(By.id("spPopupRow0")).click();
 		Thread.sleep(1000);
 		// click marital status input dropdown
-		driver.findElement(By.id("FTNETXDriverCalcMaritalStatusMeaning1_1_img")).click(); /* ----------------- marital status ----------------- */ 
+		driver.findElement(By.id("FTNETXDriverCalcMaritalStatusMeaning1_1_img")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.id("spPopupRow2")).click();
+		// click dropdown value by searching inner text value
+		driver.findElement(By.xpath("//td[text()='" + marital_status + "']")).click();
+		//driver.findElement(By.id("spPopupRow2")).click();
 		Thread.sleep(1000);
 		
 		// click continue button
@@ -293,14 +299,18 @@ public class Quote {
 		driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys(date_of_purchase);
 		
 		// select if home is rented out
-		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click(); /* ----------------- is rented? ----------------- */ 
+		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click(); /* ----------------- is rented? ----------------- */
 		Thread.sleep(1000);
+		// click dropdown value by searching inner text value
+		// driver.findElement(By.xpath("//td[text()='" + marital_status + "']")).click();
 		driver.findElement(By.id("spPopupRow1")).click();
 		
 		// select sump pump
-		driver.findElement(By.id("FVENCXPropertySumpPumpCountMeaning_img")).click(); /* ----------------- number of sump pumps ----------------- */ 
+		driver.findElement(By.id("FVENCXPropertySumpPumpCountMeaning_img")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.id("spPopupRow0")).click();
+		// click dropdown value by searching inner text value
+		driver.findElement(By.xpath("//td[text()='" + sump_pumps + "']")).click();
+		// driver.findElement(By.id("spPopupRow0")).click();
 		
 		// select roof year
 		driver.findElement(By.id("FVENCXPropertyRoofImprovementYearNumber_input")).sendKeys(roof_year);
@@ -316,10 +326,11 @@ public class Quote {
 		
 		/* --------------- SEVENTH PAGE OF QUOTE FORM --------------- */
 		// click following conditions input dropdown
-		driver.findElement(By.id("FVENCXPropertyUnderwritngCalcPropertyUnderwriteMeets_img")).click(); /* ----------------- conditions ----------------- */ 
+		driver.findElement(By.id("FVENCXPropertyUnderwritngCalcPropertyUnderwriteMeets_img")).click();
 		Thread.sleep(1000);
-		// select conditions value in dropdown
-		driver.findElement(By.id("spPopupRow1")).click();
+		// click dropdown value by searching inner text value
+		driver.findElement(By.xpath("//td[text()='" + conditions + "']")).click();
+		// driver.findElement(By.id("spPopupRow1")).click();
 		
 		// click prior insurance input dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationENCXPropertyPrirInsrncTypMnng_img")).click();
