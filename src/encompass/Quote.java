@@ -47,7 +47,6 @@ public class Quote {
 			ResultSet result = stmt.executeQuery("select * from encompass_quote");
 			
 			while(result.next()) {
-				// System.out.println(result.getInt("id") + ", " + result.getString("title"));
 				id = result.getString("id");
 				first_name = result.getString("first_name");
 				last_name = result.getString("last_name");
@@ -84,6 +83,32 @@ public class Quote {
 			}
 			
 			conn.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	static void insertQuote(String quote) {
+		try {
+			// connect to mysql database 
+			// database name: cms
+			// database username: cms_user
+			// database password: userpass
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cms", "cms_user", "userpass");
+			System.out.println("Connected to MySQL Database...");
+			System.out.println(conn.isValid(1000));
+			
+			// create statement object to send to sql database
+			Statement stmt = conn.createStatement();
+			
+			// prepare sql insert statement
+			String sql = "update encompass_quote set initial_quote = '" + quote + "' where id = " + id;
+			System.out.println(sql);
+			// execute sql statement
+			stmt.executeUpdate(sql);
+			
+			System.out.println("Insert successful");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -261,7 +286,7 @@ public class Quote {
 		// click calculate in MSB button
 		driver.findElement(By.id("_FVENCXPropertyCalcMSBButton")).click();
 		// 6 second timeout for page load
-		Thread.sleep(6000);
+		Thread.sleep(7000);
 		
 		// stores all window handles
 		handles = driver.getWindowHandles();
@@ -351,16 +376,18 @@ public class Quote {
 		
 		// click continue inside modal window
 		driver.findElement(By.id("_ErrorModalContinue")).click();
-		Thread.sleep(5000);
+		Thread.sleep(7000);
 		
 		// click close on binding alert
 		driver.findElement(By.id("_CloseDoNotBind")).click();
-		Thread.sleep(1000);
+		Thread.sleep(7000);
 		
 		// store quote value
 		String quoteValue = driver.findElement(By.className("wf_premiumView")).getText();
 		// print quote value to console
 		System.out.println(quoteValue);
+		
+		insertQuote(quoteValue);
 		
 		// Thread.sleep(5000);
 		// driver.quit();
