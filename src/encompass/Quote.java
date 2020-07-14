@@ -130,34 +130,45 @@ public class Quote {
 		// 3 second timeout for page load
 		Thread.sleep(3000);
 		
-		/* --------------- ENCOMPASS AGENT LOGIN --------------- */
-		// select username input field
+		/* 
+		 * --------------- ENCOMPASS AGENT LOGIN --------------- 
+		 * logs into encompass agent
+		 * logs out of pkms screen (possibly due to anonymous user chrome session)
+		 * logs back into encompass agent
+		 * stores parent/popup window handles
+		 * starts quote
+		 * sets focus to popup window
+		 * 
+		*/
+		// sends username
 		driver.findElement(By.name("username")).sendKeys("a1177529");
-		// select password input field
+		// sends password
 		driver.findElement(By.name("password")).sendKeys("fzP94W5K0z");
-		// select submit button
+		// clicks submit
 		driver.findElement(By.name("submitBtn")).click();
-		// 3 second timeout for page load
+		// wait for page load
 		Thread.sleep(3000);
 		
-		// log out current user session
+		// log out of pkms
 		driver.findElement(By.cssSelector("a[href*='pkmslogout']")).click();
-		// 3 second timeout for page load
+		// wait for page load
 		Thread.sleep(3000);
 		
+		// repeat login
 		driver.findElement(By.name("username")).sendKeys("a1177529");
 		driver.findElement(By.name("password")).sendKeys("fzP94W5K0z");
 		driver.findElement(By.name("submitBtn")).click();
+		// wait for dashboard page load
 		Thread.sleep(5000);
 		
 		// stores parent window handle
 		String parentWindow = driver.getWindowHandle();
-		// will store popup window handle
+		// init popup window handle
 		String popupWindow = null;
 		
 		// click start quote button
 		driver.findElement(By.name("startQuote")).click();
-		// 6 second timeout for page load
+		// wait for page load
 		Thread.sleep(6000);
 		
 		// stores all window handles
