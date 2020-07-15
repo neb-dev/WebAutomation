@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Quote {
+	
+	// form variables
 	static String id = "";
 	static String first_name = ""; 
 	static String last_name = "";
@@ -46,6 +48,7 @@ public class Quote {
 			// execute query - store result
 			ResultSet result = stmt.executeQuery("select * from encompass_quote");
 			
+			// loop through result and set values
 			while(result.next()) {
 				id = result.getString("id");
 				first_name = result.getString("first_name");
@@ -125,9 +128,9 @@ public class Quote {
 		// init webdriver object - pass options argument
 		WebDriver driver = new ChromeDriver();
 		
-		// navigate to encompass agent login form
+		// opens encompass agent login form
 		driver.get("https://dashboard.encompassinsurance.com/pkmslogin.form");
-		// 3 second timeout for page load
+		// wait for page load
 		Thread.sleep(3000);
 		
 		/* 
@@ -158,7 +161,7 @@ public class Quote {
 		driver.findElement(By.name("username")).sendKeys("a1177529");
 		driver.findElement(By.name("password")).sendKeys("fzP94W5K0z");
 		driver.findElement(By.name("submitBtn")).click();
-		// wait for dashboard page load
+		// wait for page load
 		Thread.sleep(5000);
 		
 		// stores parent window handle
@@ -184,65 +187,70 @@ public class Quote {
 		// focus popup window
 		driver.switchTo().window(popupWindow);
 		
-		/* --------------- INITIAL START FORM --------------- */
-		// click state input dropdown
+		/* --------------- INITIAL QUOTE FORM --------------- */
+		/*
+		 * select state (Nebraska)
+		 * select business type (Homeowner)
+		 * select number of residents
+		*/
+		// click state dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationStateMeaning2_img")).click();
-		// 1 second timeout for input update
 		Thread.sleep(1000);
-		// select state value in dropdown
+		// select value (Nebraska)
 		driver.findElement(By.id("spPopupRow2")).click();
-		// 1 second timeout for form update
 		Thread.sleep(1000);
 		
-		// click business type input dropdown
+		// click business type dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationCalcLineOfBusiness_img")).click();
 		Thread.sleep(1000);
+		// select value (Homeowner)
 		driver.findElement(By.id("spPopupRow2")).click();
 		Thread.sleep(1000);
 		
-		// click number of residents input dropdown
+		// click residents dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationNumDrivers_img")).click();
 		Thread.sleep(1000);
+		// select value (1)
 		driver.findElement(By.id("spPopupRow0")).click();
 		Thread.sleep(1000);
 		
 		// click start button
 		driver.findElement(By.id("ACFRPreLaunchStart")).click();
-		// 3 second timeout for page load
 		Thread.sleep(5000);
 		
-		/* --------------- FIRST PAGE OF QUOTE FORM --------------- */
+		/* --------------- PAGE 1 QUOTE FORM --------------- */
+		// sends first/last name, dob, email, phone, address, city, state, zip, county
+		
 		// close dialog box
 		driver.findElement(By.id("_fcraCloseButton")).click();
 		
-		// select insured first name input
+		// sends first name
 		driver.findElement(By.id("FVNETXInsuredFirstName_input")).sendKeys(first_name);
-		// select insured last name input
+		// sends last name
 		driver.findElement(By.id("FVNETXInsuredLastName_input")).sendKeys(last_name);
-		// select dob input
+		// sends dob
 		driver.findElement(By.id("FVNETXInsuredCalcDOB_input")).sendKeys(date_of_birth);
-		// select email input
+		// sends email
 		driver.findElement(By.id("FVNETXAddressEmailAddress_input")).sendKeys(email);
-		// select home phone input
+		// sends phone
 		driver.findElement(By.id("FVNETXAddressHomePhoneNumber_input")).sendKeys(phone);
-		// select address input
+		// sends address
 		driver.findElement(By.id("FVNETXAddressAddressLine1_input")).sendKeys(address);
-		// select city input
+		// sends city
 		driver.findElement(By.id("FVNETXAddressCity_input")).sendKeys(city);
-		// click state input dropdown
+		// click state dropdown
 		driver.findElement(By.id("FVNETXAddressState_img")).click();
 		// 1 second timeout for input update
 		Thread.sleep(1000);
-		// select state value in dropdown
+		// select value (Nebraska)
 		driver.findElement(By.id("spPopupRow30")).click();
-		// select zip code input
+		// sends zip
 		driver.findElement(By.id("FVNETXAddressPostalCode_input")).sendKeys(zip);
-		// click county input dropdown
+		// click county dropdown
 		driver.findElement(By.id("FVNETXAddressCountyMeaning_img")).click(); 
 		Thread.sleep(1000);
-		// click dropdown value by searching inner text value
+		// select value by searching inner text value
 		driver.findElement(By.xpath("//td[text()='" + county.toUpperCase() + "']")).click();
-		//driver.findElement(By.id("spPopupRow27")).click();
 		
 		// click continue button
 		driver.findElement(By.id("_PolicyContinue")).click();
