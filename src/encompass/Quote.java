@@ -219,8 +219,17 @@ public class Quote {
 		Thread.sleep(5000);
 		
 		/* --------------- PAGE 1 QUOTE FORM --------------- */
-		// sends first/last name, dob, email, phone, address, city, state, zip, county
-		
+		/* 
+		 * sends first/last name,
+		 * dob,
+		 * email, 
+		 * phone,
+		 * address,
+		 * city,
+		 * state,
+		 * zip, 
+		 * county
+		*/
 		// close dialog box
 		driver.findElement(By.id("_fcraCloseButton")).click();
 		
@@ -240,7 +249,6 @@ public class Quote {
 		driver.findElement(By.id("FVNETXAddressCity_input")).sendKeys(city);
 		// click state dropdown
 		driver.findElement(By.id("FVNETXAddressState_img")).click();
-		// 1 second timeout for input update
 		Thread.sleep(1000);
 		// select value (Nebraska)
 		driver.findElement(By.id("spPopupRow30")).click();
@@ -257,19 +265,21 @@ public class Quote {
 		Thread.sleep(5000);
 		
 		/* --------------- SECOND PAGE OF QUOTE FORM --------------- */
-		// click gender input dropdown
+		/*
+		 * sends gender,
+		 * marital status
+		*/
+		// click gender dropdown
 		driver.findElement(By.id("FTNETXDrivergGenderMeaning_1_img")).click();
 		Thread.sleep(1000);
-		// click dropdown value by searching inner text value
+		// select value by searching inner text value
 		driver.findElement(By.xpath("//td[text()='" + gender + "']")).click();
-		//driver.findElement(By.id("spPopupRow0")).click();
 		Thread.sleep(1000);
-		// click marital status input dropdown
+		// click marital status dropdown
 		driver.findElement(By.id("FTNETXDriverCalcMaritalStatusMeaning1_1_img")).click();
 		Thread.sleep(1000);
-		// click dropdown value by searching inner text value
+		// select value by searching inner text value
 		driver.findElement(By.xpath("//td[text()='" + marital_status + "']")).click();
-		//driver.findElement(By.id("spPopupRow2")).click();
 		Thread.sleep(1000);
 		
 		// click continue button
@@ -282,14 +292,14 @@ public class Quote {
 		Thread.sleep(2000);
 		
 		/* --------------- FOURTH PAGE OF QUOTE FORM --------------- */
-		// click carrier data radio input
+		// retrieve prior carrier data
 		driver.findElement(By.id("FVCCDBCalcRateUsingMeaning_Prior Carrier Data")).click();
 		Thread.sleep(1000);
 		
-		// select years as auto customer - get text value from length with prior carrier
+		// sends # of years with prior carrier
 		driver.findElement(By.id("FVCCDBCalcAgentAutoYearAsCustomer_input")).sendKeys(driver.findElement(By.id("_CCDBYearsWithPrior_ro")).getText());
 		
-		// select number of vehicles
+		// sends # of vehicles
 		driver.findElement(By.id("FVNETXPolicyInformationEGroupVehicleCount_input")).sendKeys("1");
 		
 		// click continue button
