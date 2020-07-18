@@ -13,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Quote {
-	
 	// form variables
 	static String id = "";
 	static String first_name = ""; 
@@ -118,10 +117,7 @@ public class Quote {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		
 		connectToDataSource();
-		
-		System.out.println("name: " + first_name + " " + last_name);
 		
 		// set webdriver to chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\josh\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -141,7 +137,6 @@ public class Quote {
 		 * stores parent/popup window handles
 		 * starts quote
 		 * sets focus to popup window
-		 * 
 		*/
 		// sends username
 		driver.findElement(By.name("username")).sendKeys("a1177529");
@@ -187,11 +182,11 @@ public class Quote {
 		// focus popup window
 		driver.switchTo().window(popupWindow);
 		
-		/* --------------- INITIAL QUOTE FORM --------------- */
-		/*
+		/* 
+		 * --------------- INITIAL QUOTE FORM ---------------
 		 * select state (Nebraska)
 		 * select business type (Homeowner)
-		 * select number of residents
+		 * select number of residents (1)
 		*/
 		// click state dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationStateMeaning2_img")).click();
@@ -218,8 +213,8 @@ public class Quote {
 		driver.findElement(By.id("ACFRPreLaunchStart")).click();
 		Thread.sleep(5000);
 		
-		/* --------------- PAGE 1 QUOTE FORM --------------- */
 		/* 
+		 * --------------- PAGE 1 QUOTE FORM ---------------
 		 * sends first/last name,
 		 * dob,
 		 * email, 
@@ -235,50 +230,60 @@ public class Quote {
 		
 		// sends first name
 		driver.findElement(By.id("FVNETXInsuredFirstName_input")).sendKeys(first_name);
+		
 		// sends last name
 		driver.findElement(By.id("FVNETXInsuredLastName_input")).sendKeys(last_name);
+		
 		// sends dob
 		driver.findElement(By.id("FVNETXInsuredCalcDOB_input")).sendKeys(date_of_birth);
+		
 		// sends email
 		driver.findElement(By.id("FVNETXAddressEmailAddress_input")).sendKeys(email);
+		
 		// sends phone
 		driver.findElement(By.id("FVNETXAddressHomePhoneNumber_input")).sendKeys(phone);
+		
 		// sends address
 		driver.findElement(By.id("FVNETXAddressAddressLine1_input")).sendKeys(address);
+		
 		// sends city
 		driver.findElement(By.id("FVNETXAddressCity_input")).sendKeys(city);
+		
 		// click state dropdown
 		driver.findElement(By.id("FVNETXAddressState_img")).click();
 		Thread.sleep(1000);
 		// select value (Nebraska)
 		driver.findElement(By.id("spPopupRow30")).click();
+		
 		// sends zip
 		driver.findElement(By.id("FVNETXAddressPostalCode_input")).sendKeys(zip);
+		
 		// click county dropdown
 		driver.findElement(By.id("FVNETXAddressCountyMeaning_img")).click(); 
 		Thread.sleep(1000);
-		// select value by searching inner text value
+		// select value by inner text value
 		driver.findElement(By.xpath("//td[text()='" + county.toUpperCase() + "']")).click();
 		
 		// click continue button
 		driver.findElement(By.id("_PolicyContinue")).click();
 		Thread.sleep(5000);
 		
-		/* --------------- SECOND PAGE OF QUOTE FORM --------------- */
-		/*
+		/* 
+		 * --------------- SECOND PAGE OF QUOTE FORM ---------------
 		 * sends gender,
 		 * marital status
 		*/
 		// click gender dropdown
 		driver.findElement(By.id("FTNETXDrivergGenderMeaning_1_img")).click();
 		Thread.sleep(1000);
-		// select value by searching inner text value
+		// select value by inner text value
 		driver.findElement(By.xpath("//td[text()='" + gender + "']")).click();
 		Thread.sleep(1000);
+		
 		// click marital status dropdown
 		driver.findElement(By.id("FTNETXDriverCalcMaritalStatusMeaning1_1_img")).click();
 		Thread.sleep(1000);
-		// select value by searching inner text value
+		// select value by inner text value
 		driver.findElement(By.xpath("//td[text()='" + marital_status + "']")).click();
 		Thread.sleep(1000);
 		
@@ -291,7 +296,12 @@ public class Quote {
 		driver.findElement(By.id("_VehicleViolationsContinue")).click();
 		Thread.sleep(2000);
 		
-		/* --------------- FOURTH PAGE OF QUOTE FORM --------------- */
+		/* 
+		 * --------------- FOURTH PAGE OF QUOTE FORM --------------- 
+		 * retrieves prior auto carrier data
+		 * sends # of years with carrier
+		 * sends # of vehicles
+		*/
 		// retrieve prior carrier data
 		driver.findElement(By.id("FVCCDBCalcRateUsingMeaning_Prior Carrier Data")).click();
 		Thread.sleep(1000);
@@ -306,15 +316,24 @@ public class Quote {
 		driver.findElement(By.id("_VehicleUndrwrtngContinue")).click();
 		Thread.sleep(5000);
 		
-		/* --------------- FIFTH PAGE OF QUOTE FORM --------------- */
+		/* 
+		 * --------------- FIFTH PAGE OF QUOTE FORM --------------- 
+		 * stores parent/popup window handle
+		 * calculates reconstruction cost
+		 * sends calculation to dwelling protection,
+		 * occupancy type,
+		 * property purchase date,
+		 * if property is rented out,
+		 * # of sump pumps,
+		 * year of roof installment
+		*/
 		// stores parent window handle
 		parentWindow = driver.getWindowHandle();
-		// will store popup window handle
+		// init popup window handle
 		popupWindow = null;
 		
 		// click calculate in MSB button
 		driver.findElement(By.id("_FVENCXPropertyCalcMSBButton")).click();
-		// 6 second timeout for page load
 		Thread.sleep(7000);
 		
 		// stores all window handles
@@ -336,37 +355,36 @@ public class Quote {
 		
 		// click save button
 		driver.findElement(By.id("SaveValuationButton")).click();
-		// switch back to parent window
+		
+		// focus parent window
 		driver.switchTo().window(parentWindow);
 		Thread.sleep(8000);
 		
-		// select dwelling protection input - get text value from reconstruction cost
+		// select dwelling protection - send value from calculation
 		driver.findElement(By.id("FVENCXPropertyCalcResidenceReplacementValue_input")).sendKeys(driver.findElement(By.id("_FVENCXPropertyCalcMSBButton")).getText());
 		
-		// click occupancy input dropdown
+		// click occupancy dropdown
 		driver.findElement(By.id("FVENCXPropertyENCXOccupancyCodeMeaning_img")).click();
 		Thread.sleep(1000);
-		// select owner value in dropdown
+		// select value (Owner)
 		driver.findElement(By.id("spPopupRow0")).click();
 		
-		// select property purchase date
+		// sends property purchase date
 		driver.findElement(By.id("FVENCXPropertyPurchaseDate_input")).sendKeys(date_of_purchase);
 		
-		// select if home is rented out
-		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click(); /* ----------------- is rented? ----------------- */
+		// click isRented? dropdown
+		driver.findElement(By.id("FVENCXPropertyRentedToOthersFlag_img")).click();
 		Thread.sleep(1000);
-		// click dropdown value by searching inner text value
-		// driver.findElement(By.xpath("//td[text()='" + marital_status + "']")).click();
+		// select value (No)
 		driver.findElement(By.id("spPopupRow1")).click();
 		
-		// select sump pump
+		// click # of sump pumps dropdown
 		driver.findElement(By.id("FVENCXPropertySumpPumpCountMeaning_img")).click();
 		Thread.sleep(1000);
-		// click dropdown value by searching inner text value
+		// select value by inner text value
 		driver.findElement(By.xpath("//td[text()='" + sump_pumps + "']")).click();
-		// driver.findElement(By.id("spPopupRow0")).click();
 		
-		// select roof year
+		// sends roof installment year
 		driver.findElement(By.id("FVENCXPropertyRoofImprovementYearNumber_input")).sendKeys(roof_year);
 		
 		// click continue button
@@ -378,18 +396,21 @@ public class Quote {
 		driver.findElement(By.id("_PropertyLossContinue")).click();
 		Thread.sleep(5000);
 		
-		/* --------------- SEVENTH PAGE OF QUOTE FORM --------------- */
-		// click following conditions input dropdown
+		/* 
+		 * --------------- SEVENTH PAGE OF QUOTE FORM --------------- 
+		 * sends conditions?,
+		 * prior insurance
+		*/
+		// click following conditions dropdown
 		driver.findElement(By.id("FVENCXPropertyUnderwritngCalcPropertyUnderwriteMeets_img")).click();
 		Thread.sleep(1000);
-		// click dropdown value by searching inner text value
+		// select value by inner text value
 		driver.findElement(By.xpath("//td[text()='" + conditions + "']")).click();
-		// driver.findElement(By.id("spPopupRow1")).click();
 		
 		// click prior insurance input dropdown
 		driver.findElement(By.id("FVNETXPolicyInformationENCXPropertyPrirInsrncTypMnng_img")).click();
 		Thread.sleep(1000);
-		// select property insurance value in dropdown
+		// select value in dropdown (no prior insurance)
 		driver.findElement(By.id("spPopupRow2")).click();
 		Thread.sleep(1000);
 		
@@ -397,17 +418,27 @@ public class Quote {
 		driver.findElement(By.id("_PropUndrwrtngContinue")).click();
 		Thread.sleep(5000);
 		
-		/* --------------- LAST PAGE OF QUOTE FORM --------------- */
-		// select wind/hail coverage
+		/* 
+		 * --------------- LAST PAGE OF QUOTE FORM --------------- 
+		 * sends wind/hail coverage amount,
+		 * closes modal,
+		 * close binding alert modal,
+		 * store quote value as String,
+		 * sends value to insertQuote method
+		 * driver waits five seconds
+		 * driver quits
+		*/
+		// send wind/hail coverage
 		driver.findElement(By.id("FTNETXCalcErrorGridInput_2_img")).click();
 		Thread.sleep(1000);
+		// select value (no coverage)
 		driver.findElement(By.id("spPopupRow12")).click();
 		
-		// click continue inside modal window
+		// click continue inside modal
 		driver.findElement(By.id("_ErrorModalContinue")).click();
 		Thread.sleep(7000);
 		
-		// click close on binding alert
+		// click close on binding alert modal
 		driver.findElement(By.id("_CloseDoNotBind")).click();
 		Thread.sleep(7000);
 		
@@ -422,3 +453,25 @@ public class Quote {
 		// driver.quit();
 	}
 }
+
+/*
+ * --------------- ADDITONAL COMMENTS ---------------
+ * - rather than using sleep, the program could be further optimized using implicit, explicit, and fluent wait commands
+ * - form values needing greater flexibility, such as:
+ * 		state
+ * 		# of residents
+ * 		# of vehicles
+ * 		if property is rented
+ * 		if property is in gated community (see on property info. form page)
+ * 		prior insurance
+ * 		adjusting coverage amounts (see last form page)
+ * - program needs handling for users with vehicle violations (see form page #3 above) & property loss (see form page #6 above)
+ * - program still needs to be connected to the WeCare database
+ * - program needs logic to determine which table row to execute (i.e. WHERE initial_quote = null)
+ * - see the php bootstrap form for the mysql table structure
+ * 
+ * --------------- SELENIUM WEBDRIVER, CHROMEDRIVER, JDBC JAR ---------------
+ * - Selenium WebDriver: https://www.selenium.dev/downloads/ (scroll down to WebDriver section)
+ * - ChromeDriver: https://sites.google.com/a/chromium.org/chromedriver/
+ * - JDBC (Java Database Connectivity): https://dev.mysql.com/downloads/connector/j/ (select platform independent)
+ */
